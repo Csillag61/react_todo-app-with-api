@@ -24,6 +24,7 @@ export const App: React.FC = () => {
     handleToggleAllTodos,
     handleUpdateTodo,
     isAdding,
+    isClearingCompleted,
     isDeleting,
     isToggling,
     loading,
@@ -35,12 +36,19 @@ export const App: React.FC = () => {
     todosToDisplay,
   } = TodoManager();
 
+  const areAllCompleted =
+    todos.length > 0 && todos.every(todo => todo.completed);
+
   return (
     <div className="todoapp">
       <div className="todoapp__title">todo</div>
 
       {/* Header */}
-      <Header handleToggle={handleToggleAllTodos} />
+
+      <Header
+        handleToggle={handleToggleAllTodos}
+        areAllCompleted={areAllCompleted}
+      />
 
       {/* Add Todo Form */}
       <AddTodoForm
@@ -72,7 +80,7 @@ export const App: React.FC = () => {
         filterBy={filterBy}
         setFilterBy={setFilterBy}
         onClearCompleted={handleClearCompleted}
-        isClearingCompleted={!!isDeleting}
+        isClearingCompleted={isClearingCompleted}
       />
 
       {/* Temporary Todo */}

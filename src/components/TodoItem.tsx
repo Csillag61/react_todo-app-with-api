@@ -8,7 +8,7 @@ type Props = {
   deleteTodo: (todoId: number) => Promise<void>;
   updateTodo: (todoId: number, title: string) => Promise<void>;
   isDeleting?: boolean;
-  isToggling?: boolean;
+  isToggling?: boolean | null;
   loading?: boolean;
 };
 

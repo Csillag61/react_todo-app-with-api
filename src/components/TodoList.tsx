@@ -30,7 +30,7 @@ export const TodoList: React.FC<Props> = ({
           onToggle={toggleTodo}
           deleteTodo={deleteTodo}
           isDeleting={isDeleting === todo.id}
-          isToggling={isToggling && isDeleting === todo.id}
+          isToggling={isToggling}
           updateTodo={updateTodo}
         />
       ))}

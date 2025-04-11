@@ -8,7 +8,6 @@ import {
   deleteTodo,
   updateTodo,
 } from '../api/todos';
-import { client } from '../utils/fetchClient';
 import { Errors } from '../types/Errors';
 import { FilterBy } from '../types/FilterBy';
 
@@ -104,18 +103,17 @@ export const TodoManager = () => {
   };
 
   const handleClearCompleted = async () => {
-    setIsClearingCompleted(true);
-    const completedTodos = todos.filter(todo => todo.completed);
+    setIsClearingCompleted(true); // Set flag when action starts
 
     try {
-      await Promise.all(
-        completedTodos.map(todo => client.delete(`/todos/${todo.id}`)),
-      );
+      const completedTodos = todos.filter(todo => todo.completed);
+
+      await Promise.all(completedTodos.map(todo => deleteTodo(todo.id)));
       setTodos(prev => prev.filter(todo => !todo.completed));
-    } catch (err) {
-      setErrorMessage(Errors.DELETE_ID);
+    } catch (error) {
+      setErrorMessage(Errors.CLEAR);
     } finally {
-      setIsClearingCompleted(false);
+      setIsClearingCompleted(false); // Reset flag when action finishes
     }
   };
 

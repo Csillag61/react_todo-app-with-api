@@ -1,5 +1,6 @@
 export enum Errors {
   DEFAULT = '',
+  CLEAR = 'Unable to clear completed todos',
   LOAD = 'Unable to load todos',
   EMPTY = 'Title should not be empty',
   ADD = 'Unable to add a todo',
