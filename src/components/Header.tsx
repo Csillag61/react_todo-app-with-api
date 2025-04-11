@@ -1,15 +1,16 @@
 /* eslint-disable max-len */
-import React from 'react';
-
-export const Header: React.FC<{ handleToggle: () => Promise<void> }> = ({
+export const Header: React.FC<{
+  handleToggle: () => Promise<void>;
+  areAllCompleted: boolean;
+}> = ({
   handleToggle,
+  areAllCompleted, // Add a prop to track completion status
 }) => {
   return (
     <header className="todoapp__header">
-      {/* This button should have the `active` class only if all todos are completed */}
       <button
         type="button"
-        className="todoapp__toggle-all active"
+        className={`todoapp__toggle-all ${areAllCompleted ? 'active' : ''}`} // Dynamically set the active class
         data-cy="ToggleAllButton"
         title="Toggle all todos"
         onClick={handleToggle}
